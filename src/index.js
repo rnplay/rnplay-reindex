@@ -1,43 +1,34 @@
-'use strict';
-
-const {
-  app,
-  ...rest
-} = window.__data;
-
+import { browserHistory } from 'react-router';
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Relay from 'react-relay';
+import { Route } from 'react-router';
+import { RelayRouter } from 'react-router-relay';
 
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import promise from './utils/redux/promiseMiddleware';
 import createLogger from 'redux-logger';
 import * as reducers from './reducers/';
-import Editor from './containers/Editor';
 import { editor } from './actions/';
+import Reindex from './Reindex';
 
-let logger = createLogger({
-  predicate: (getState, action) => rest.isDevelopment
-});
+Relay.injectNetworkLayer(Reindex.getRelayNetworkLayer());
 
-const reducer = combineReducers(reducers);
-const store = applyMiddleware(thunk, promise, logger)(createStore)(reducer)
+let reduxMiddlewares = [thunk, promise];
 
-store.dispatch(editor.switchApp(app));
-
-const { url_params: { file } } = app;
-if (file) {
-  store.dispatch(editor.switchFile(file));
+if (process.env.NODE_ENV === 'development') {
+  const createLogger = require('redux-logger');
+  const logger = createLogger();
+  reduxMiddlewares.push(logger);
 }
 
-// Grande disablos for CodeMirror
-window.onscroll = (e) => {
-  window.scrollTo(0, 0);
-};
+const reducer = combineReducers(reducers);
+const store = applyMiddleware(...reduxMiddlewares)(createStore)(reducer);
 
-React.render((
+ReactDOM.render((
   <Provider store={store}>
-    {() => (<Editor {...rest} />)}
+    <h1>RNPlay Reindex</h1>
   </Provider>
-), document.getElementById('editor-container'));
+), document.getElementById('root'));
