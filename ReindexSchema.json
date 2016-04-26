@@ -1,0 +1,226 @@
+  [
+    {
+      "name": "User",
+      "kind": "OBJECT",
+      "interfaces": [
+        "Node"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "ID",
+          "nonNull": true,
+          "unique": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "orderable": true
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "unique": true
+        },
+        {
+          "name": "applications",
+          "type": "Connection",
+          "ofType": "Application",
+          "reverseName": "user"
+        },
+        {
+          "name": "roles",
+          "type": "Connection",
+          "ofType": "Role",
+          "reverseName": "users"
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "orderable": true
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "orderable": true
+        }
+      ]
+    },
+    {
+      "name": "Application",
+      "kind": "OBJECT",
+      "interfaces": [
+        "Node"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "ID",
+          "nonNull": true,
+          "unique": true
+        },
+        {
+          "name": "name",
+          "type": "String"
+        },
+        {
+          "name": "urlToken",
+          "type": "String"
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "orderable": true
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "orderable": true
+        },
+        {
+          "name": "user",
+          "type": "User",
+          "reverseName": "applications"
+        }
+      ],
+      "permissions": [
+        {
+          "grantee": "USER",
+          "userPath": ["user"],
+          "read": true,
+          "update": true,
+          "delete": true
+        },
+        {
+          "grantee": "AUTHENTICATED",
+          "create": true,
+          "read": true
+        }
+      ]
+    },
+    {
+      "name": "Device",
+      "kind": "OBJECT",
+      "interfaces": [
+        "Node"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "ID",
+          "nonNull": true,
+          "unique": true
+        },
+        {
+          "name": "order",
+          "type": "Int"
+        },
+        {
+          "name": "default",
+          "type": "Boolean"
+        },
+        {
+          "name": "make",
+          "type": "String",
+          "nonNull": true
+        },
+        {
+          "name": "label",
+          "type": "String",
+          "nonNull": true
+        },
+        {
+          "name": "platform",
+          "type": "String",
+          "nonNull": true
+        },
+        {
+          "name": "os",
+          "type": "String",
+          "nonNull": true
+        },
+        {
+          "name": "width",
+          "type": "Int",
+          "nonNull": true
+        },
+        {
+          "name": "height",
+          "type": "Int",
+          "nonNull": true
+        },
+        {
+          "name": "phoneWidth",
+          "type": "Int"
+        },
+        {
+          "name": "phoneHeight",
+          "type": "Int"
+        },
+        {
+          "name": "screenOffsetTop",
+          "type": "Int"
+        },
+        {
+          "name": "screenOffsetLeft",
+          "type": "Int"
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime"
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime"
+        }
+      ],
+      "permissions": [
+        {
+          "grantee": "AUTHENTICATED",
+          "read": true
+        }
+      ]
+    },
+    {
+      "name": "Role",
+      "kind": "OBJECT",
+      "interfaces": [
+        "Node"
+      ],
+      "fields": [
+        {
+          "name": "id",
+          "type": "ID",
+          "nonNull": true,
+          "unique": true
+        },
+        {
+          "name": "name",
+          "type": "String",
+          "nonNull": true
+        },
+        {
+          "name": "users",
+          "type": "Connection",
+          "ofType": "User",
+          "reverseName": "roles"
+        },
+        {
+          "name": "createdAt",
+          "type": "DateTime",
+          "orderable": true
+        },
+        {
+          "name": "updatedAt",
+          "type": "DateTime",
+          "orderable": true
+        }
+      ],
+      "permissions": [
+        {
+          "grantee": "AUTHENTICATED",
+          "read": true
+        }
+      ]
+    }
+  ]

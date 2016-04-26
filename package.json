@@ -5,7 +5,7 @@
   "scripts": {
     "test": "NODE_ENV=production webpack --config webpack.config.prod.js",
     "start": "node devServer.js",
-    "schema": "babel-node bin/schema.js"
+    "schema": "babel-node bin/schema.js schema-push && babel-node bin/schema.js schema-relay"
   },
   "dependencies": {
     "autoprefixer": "6.3.6",
