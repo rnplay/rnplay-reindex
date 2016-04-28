@@ -64,8 +64,22 @@
           "type": "String"
         },
         {
-          "name": "urlToken",
+          "name": "indexMain",
           "type": "String"
+        },
+        {
+          "name": "indexIos",
+          "type": "String"
+        },
+        {
+          "name": "indexAndroid",
+          "type": "String"
+        },
+        {
+          "name": "urlToken",
+          "type": "String",
+          "nonNull": true,
+          "unique": true
         },
         {
           "name": "createdAt",
@@ -99,7 +113,7 @@
       ]
     },
     {
-      "name": "Device",
+      "name": "Build",
       "kind": "OBJECT",
       "interfaces": [
         "Node"
@@ -112,22 +126,8 @@
           "unique": true
         },
         {
-          "name": "order",
-          "type": "Int"
-        },
-        {
           "name": "default",
           "type": "Boolean"
-        },
-        {
-          "name": "make",
-          "type": "String",
-          "nonNull": true
-        },
-        {
-          "name": "label",
-          "type": "String",
-          "nonNull": true
         },
         {
           "name": "platform",
@@ -135,35 +135,14 @@
           "nonNull": true
         },
         {
-          "name": "os",
+          "name": "version",
           "type": "String",
           "nonNull": true
         },
         {
-          "name": "width",
-          "type": "Int",
+          "name": "appetizeId",
+          "type": "String",
           "nonNull": true
-        },
-        {
-          "name": "height",
-          "type": "Int",
-          "nonNull": true
-        },
-        {
-          "name": "phoneWidth",
-          "type": "Int"
-        },
-        {
-          "name": "phoneHeight",
-          "type": "Int"
-        },
-        {
-          "name": "screenOffsetTop",
-          "type": "Int"
-        },
-        {
-          "name": "screenOffsetLeft",
-          "type": "Int"
         },
         {
           "name": "createdAt",
