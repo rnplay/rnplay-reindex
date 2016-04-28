@@ -1,42 +1,37 @@
 import React, { Component } from 'react';
 import Qs from 'qs';
 import {DEVICE_MEASUREMENTS} from './devices';
+import {DEVICES} from './devices';
 import Resizable from 'react-component-resizable';
-
-const DEFAULT_OPTIONS = {
-  embed: true,
-  screenOnly: true,
-  xdocMsg: true,
-  debug: true,
-  device: 'ipadair',
-  orientation: 'portrait'
-};
+import Draggable from 'react-draggable';
+import classNames from 'classnames';
+import styles from './styles/main.css';
+import Select from 'react-select';
 
 export default class Appetize extends Component {
 
-  constructor(props) {
-     super(props);
-     this.state = {
-       calculatedWidth: null
-     };
-   }
+  state = {
+    embed: true,
+    screenOnly: true,
+    xdocMsg: true,
+    debug: true,
+    device: 'ipadair',
+    scale: 75,
+    orientation: 'portrait',
+    device: 'iphone6'
+  };
+
+  switchToDevice = (option) => {
+    this.setState({device: option.value});
+  }
 
   action(action) {
     document.querySelector('iframe').contentWindow.postMessage(action, '*');
   }
 
-  getOptions() {
-    let options = {...DEFAULT_OPTIONS, ...this.props.options};
-    let calculatedScale = (this.state.calculatedWidth / DEVICE_MEASUREMENTS[options.device].width) * 100;
-    if (calculatedScale > 100) {
-      calculatedScale = 100;
-    }
-    return {...options, scale: calculatedScale};
-  }
-
   url() {
     return `https://appetize.io/embed/${this.props.id}?
-      ${Qs.stringify(this.getOptions())}&
+      ${Qs.stringify(this.state)}&
       params=${encodeURIComponent(JSON.stringify(this.props.appParams))}`;
   }
 
@@ -48,40 +43,43 @@ export default class Appetize extends Component {
   componentDidMount() {
     this.eventHandler = ::this.messageEventHandler;
     this.eventListener = window.addEventListener('message', this.eventHandler, false);
-    this.calculateWidth();
-  }
-
-  calculateWidth = (values) => {
-    let width = values ? values.width : (this.refs.container.offsetWidth / window.devicePixelRatio) - 16;
-    this.setState({calculatedWidth: width});
   }
 
   render() {
-    let measurements = DEVICE_MEASUREMENTS[this.getOptions().device];
-    let width = measurements.width * (this.getOptions().scale / 100);
-    let height = measurements.height * (this.getOptions().scale / 100);
-
-    let styles = {
-      width: '100%',
-      height: '100%',
-      display: 'flex',
-      justifyContent: "center"
-    };
+    let measurements = DEVICE_MEASUREMENTS[this.state.device];
+    let width = measurements.width * (this.state.scale / 100);
+    let height = measurements.height * (this.state.scale / 100);
 
       return (
-        <Resizable ref="container" onResize={this.calculateWidth} style={styles}>
-          {this.state.calculatedWidth && <iframe
-            className={this.props.className || 'appetizeIframe'}
-            onLoad={this.props.onLoad}
-            ref="appetizeIframe"
-            src={this.url()}
-            width={width}
-            style={{margin: '0 auto'}}
-            height={height}
-            frameBorder="0"
-            scrolling="no"
-          />}
-        </Resizable>
+        <Draggable
+          handle=".handle"
+          bound="box"
+          defaultPosition={{x: 0, y: 0}}
+          zIndex={1000}>
+          <div style={{position: 'absolute', top: 60, right: 40, zIndex: '1000', boxShadow: '1px 1px 1px #eee'}}>
+            <div className={styles.appetizeHeader}>
+              <span className={classNames('handle', styles.handle)}>DRAG</span>
+              <Select
+                className={styles.device}
+                name="device"
+                clearable={false}
+                value={this.state.device}
+                options={DEVICES.ios}
+                onChange={this.switchToDevice}
+              />
+            </div>
+            <iframe
+              className={this.props.className || 'appetizeIframe'}
+              onLoad={this.props.onLoad}
+              ref="appetizeIframe"
+              src={this.url()}
+              height={height}
+              width={width}
+              frameBorder="0"
+              scrolling="no"
+            />
+          </div>
+        </Draggable>
       );
   }
 }

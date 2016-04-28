@@ -38,7 +38,8 @@ export default class ChangeApplicationMutation extends Relay.Mutation {
     return {
       changedApplication: {
         id: this.props.id,
-        name: this.props.name
+        name: this.props.name,
+        indexIos: this.props.indexIos
       },
     };
   }

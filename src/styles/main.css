@@ -1,9 +1,10 @@
 .container {
-  display: flex;
   height: 100vh;
+  background-color: #eee;
 }
 
 .header {
+  background-color: #fff;
   display: flex;
   align-items: center;
   height: 50px;
@@ -16,6 +17,15 @@
   padding-left: 8px;
   justify-content: space-between;
   flex: 1;
+}
+
+.handle {
+  font-weight: bold;
+  height: 100%;
+  display: block;
+  background-color: #eee;
+  font-size: 90% !important;
+  cursor: pointer;
 }
 
 .title {
@@ -46,18 +56,15 @@
 }
 
 .editor {
-  width: 50%;
-  height: 100%;
+  flex: 1;
+  height: 100vh;
+  max-width: 870px;
+  box-shadow: 1px 0px 3px #666;
 }
 
 .simulator {
-  position: fixed;
-  width: 50%;
+  position: absolute;
   border: 1px solid #ddd;
-  height: 100%;
-}
-
-.simulator iframe {
 }
 
 .button {
@@ -66,6 +73,7 @@
   width: 80px;
   border: 1px solid white;
   border-radius: 5px;
+  padding: 8px;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -78,6 +86,19 @@
   margin: 0;
   padding: 0;
   display: flex;
+}
+
+.appetizeHeader {
+  padding: 3px 6px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  box-sizing: border-box;
+  margin-bottom: -2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 :global(.CodeMirror) {

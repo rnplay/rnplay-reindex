@@ -4,7 +4,6 @@ import Codemirror from 'react-codemirror';
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/lib/codemirror.css';
 import Appetize from './Appetize';
-import Select from 'react-select';
 import {DEVICES} from './devices';
 import 'react-select/scss/default.scss';
 import Relay from 'react-relay';
@@ -14,7 +13,6 @@ class Main extends Component {
 
   state = {
     code: null,
-    device: 'iphone6',
     name: null
   };
 
@@ -40,18 +38,14 @@ class Main extends Component {
     );
   }
 
-  switchToDevice = (option) => {
-    this.setState({device: option.value});
-  }
-
   updateCode = (code) => {
     this.setState({code: code});
   }
 
   render() {
-    console.log(this.props.application)
     return (
       <div className={styles.container}>
+
         <div className={styles.editor}>
           <div className={styles.header}>
             <div className={styles.menu}>
@@ -62,15 +56,8 @@ class Main extends Component {
                 <input className={styles.title} type="text" defaultValue={this.props.application.name} onChange={(e) => this.setState({name: e.target.value})} />
               </form>
               <div className={styles.controls}>
-                <button onClick={this.updateApp} className={styles.button}>Save</button>
-                <Select
-                  className={styles.device}
-                  name="device"
-                  clearable={false}
-                  value={this.state.device}
-                  options={DEVICES.ios}
-                  onChange={this.switchToDevice}
-                />
+                <button onClick={this.updateApp} className={styles.button}>{this.props.relay.hasOptimisticUpdate(this.props.application) ? 'Saving...' : 'Save'}</button>
+
               </div>
             </div>
           </div>
@@ -82,9 +69,8 @@ class Main extends Component {
           }} />
         </div>
 
-        <div className={styles.simulator}>
-          <Appetize id="mzv0wej631g9mxc881x2wmnpvc" options={{device: this.state.device}} />
-        </div>
+        <Appetize id="mzv0wej631g9mxc881x2wmnpvc" options={{device: this.state.device}} />
+
       </div>
     );
   }
