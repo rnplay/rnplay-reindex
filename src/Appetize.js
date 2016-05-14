@@ -15,7 +15,6 @@ export default class Appetize extends Component {
     screenOnly: true,
     xdocMsg: true,
     debug: true,
-    device: 'ipadair',
     scale: 75,
     orientation: 'portrait',
     device: 'iphone6'
@@ -51,35 +50,28 @@ export default class Appetize extends Component {
     let height = measurements.height * (this.state.scale / 100);
 
       return (
-        <Draggable
-          handle=".handle"
-          bound="box"
-          defaultPosition={{x: 0, y: 0}}
-          zIndex={1000}>
-          <div style={{position: 'absolute', top: 60, right: 40, zIndex: '1000', boxShadow: '1px 1px 1px #eee'}}>
-            <div className={styles.appetizeHeader}>
-              <span className={classNames('handle', styles.handle)}>DRAG</span>
-              <Select
-                className={styles.device}
-                name="device"
-                clearable={false}
-                value={this.state.device}
-                options={DEVICES.ios}
-                onChange={this.switchToDevice}
-              />
-            </div>
-            <iframe
-              className={this.props.className || 'appetizeIframe'}
-              onLoad={this.props.onLoad}
-              ref="appetizeIframe"
-              src={this.url()}
-              height={height}
-              width={width}
-              frameBorder="0"
-              scrolling="no"
+        <div className={styles.appetize}>
+          <div className={styles.appetizeHeader}>
+            <Select
+              className={styles.device}
+              name="device"
+              clearable={false}
+              value={this.state.device}
+              options={DEVICES.ios}
+              onChange={this.switchToDevice}
             />
           </div>
-        </Draggable>
+          <iframe
+            className={this.props.className || 'appetizeIframe'}
+            onLoad={this.props.onLoad}
+            ref="appetizeIframe"
+            src={this.url()}
+            height={height}
+            width={width}
+            frameBorder="0"
+            scrolling="no"
+          />
+        </div>
       );
   }
 }

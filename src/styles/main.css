@@ -1,6 +1,14 @@
+:global(*) {
+  box-sizing: border-box;
+}
+
+:global(body) {
+  overflow: hidden;
+}
+
 .container {
+  display: flex;
   height: 100vh;
-  background-color: #eee;
 }
 
 .header {
@@ -17,15 +25,6 @@
   padding-left: 8px;
   justify-content: space-between;
   flex: 1;
-}
-
-.handle {
-  font-weight: bold;
-  height: 100%;
-  display: block;
-  background-color: #eee;
-  font-size: 90% !important;
-  cursor: pointer;
 }
 
 .title {
@@ -56,10 +55,7 @@
 }
 
 .editor {
-  flex: 1;
   height: 100vh;
-  max-width: 870px;
-  box-shadow: 1px 0px 3px #666;
 }
 
 .simulator {
@@ -98,9 +94,30 @@
   margin-bottom: -2px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.appetize {
+  display: inline-block;
+}
+
+:global(.ReactCodeMirror) {
+  height: calc(100% - 50px);
 }
 
 :global(.CodeMirror) {
-  height: auto !important;
+  height: 100%  !important;
+}
+
+.column {
+  height: 100%;
+}
+
+.columnLeft {
+  flex: 1 1 auto;
+}
+
+.columnRight {
+  background-color: #eee;
+  padding: 50px 40px 0 40px;
 }
