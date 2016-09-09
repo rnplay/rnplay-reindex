@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Qs from 'qs';
 import {DEVICE_MEASUREMENTS} from './devices';
 import {DEVICES} from './devices';
-import Resizable from 'react-component-resizable';
 import Draggable from 'react-draggable';
 import classNames from 'classnames';
 import styles from './styles/main.css';
