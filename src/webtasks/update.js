@@ -76,7 +76,7 @@ TASKS.forEach((task) => {
   }, []);
 
   let params = ['create', '--profile', 'rnplay', '--bundle', '--bundle-minify', (env == 'development' || process.env.WATCH) ? '--watch': null, '--name', `${envTaskName}`].concat(defaultParamArray).concat(task.params);
-  let command = compact(params).concat(`webtasks/${task.name}.js`);
+  let command = compact(params).concat(`src/webtasks/${task.name}.js`);
   console.log(command.join(" "));
   spawn('node_modules/.bin/wt', command, {stdio: 'inherit'});
 
