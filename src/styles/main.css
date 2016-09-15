@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
+  width: 50px;
   height: 100%;
   background-color: #eee;
 }
@@ -120,4 +120,11 @@
 .columnRight {
   background-color: #eee;
   padding: 50px 40px 0 40px;
+}
+
+.roundIcon{
+  padding:0px;
+  width:30px;
+  height:30px;
+  border-radius:50%;
 }

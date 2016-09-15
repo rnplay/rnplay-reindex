@@ -9,6 +9,7 @@ import {DEVICES} from './devices';
 import 'react-select/scss/default.scss';
 import Relay from 'react-relay';
 import ChangeApplicationMutation from './mutations/ChangeApplicationMutation';
+import { DropdownButton, MenuItem } from 'react-bootstrap';
 
 class Main extends Component {
 
@@ -50,7 +51,10 @@ class Main extends Component {
           <div className={styles.editor}>
             <div className={styles.header}>
               <div className={styles.menu}>
-                ^
+                <DropdownButton className={styles.roundIcon} title={<i className="fa fa-bars"></i>} noCaret id="dropdown-no-caret">
+                  <MenuItem eventKey="1">LOGIN</MenuItem>
+                  <MenuItem eventKey="2">REGISTER</MenuItem>
+                </DropdownButton>
               </div>
               <div className={styles.headerContent}>
                 <form onSubmit={this.updateApp} className={styles.form}>
