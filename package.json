@@ -11,6 +11,7 @@
     "graphiql-development": "node_modules/.bin/reindex -u https://galvanized-manganese-321.myreindex.com -t $REINDEX_TOKEN_DEV graphiql"
   },
   "dependencies": {
+    "auth0-lock": "^10.2.2",
     "autoprefixer": "6.4.1",
     "babel-polyfill": "6.13.0",
     "babel-runtime": "6.11.6",
