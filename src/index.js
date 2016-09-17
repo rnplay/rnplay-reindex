@@ -5,8 +5,9 @@ import Relay from 'react-relay';
 import { Route, Router, applyRouterMiddleware } from 'react-router';
 import useRelay from 'react-router-relay';
 import Reindex from './Reindex';
-import Main from './Main';
-import NewApp from './NewApp';
+import Main from './Components/Main';
+import NewApp from './Components/NewApp';
+import Home from './Components/Home';
 
 import {REINDEX_TOKEN} from './config';
 
@@ -19,6 +20,7 @@ Reindex.setToken(REINDEX_TOKEN);
 
 ReactDOM.render((
   <Router history={browserHistory} render={applyRouterMiddleware(useRelay)} environment={Relay.Store}>
+    <Route path="/" component={Home} />
     <Route path="/apps/new" component={NewApp} />
     <Route path="/apps/:applicationId" component={Main} queries={AppQueries} />
   </Router>

@@ -70,7 +70,7 @@ let measurements = {
     screenOffsetTop: 130,
     screenOffsetLeft: 48,
     pixelRatio: 2
-  },
+  }
 };
 
 measurements.iphone6s = measurements.iphone6;

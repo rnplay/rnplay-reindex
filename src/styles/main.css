@@ -4,11 +4,19 @@
 
 :global(body) {
   overflow: hidden;
+  font-family: 'Rubik', sans-serif;
 }
 
 .container {
   display: flex;
   height: 100vh;
+}
+
+.home {
+  padding: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .header {
@@ -29,7 +37,7 @@
 
 .title {
   border: none;
-  font-size: 90%;
+  font-size: 110%;
   color: #666;
   width: 380px;
 }
@@ -51,7 +59,6 @@
   justify-content: center;
   width: 50px;
   height: 100%;
-  background-color: #eee;
 }
 
 .editor {
@@ -129,4 +136,11 @@
   border-radius:50%;
   color:#5C069A;
   border-color: #5C069A;
+}
+
+.centered {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
 }

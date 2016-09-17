@@ -1,23 +1,21 @@
 import classNames from 'classnames';
 import React, {Component} from 'react';
-import styles from './styles/main.css';
+import styles from '../styles/main.css';
 import Codemirror from 'react-codemirror';
 import 'codemirror/mode/jsx/jsx';
 import 'codemirror/lib/codemirror.css';
 import Appetize from './Appetize';
-import {DEVICES} from './devices';
+import {DEVICES} from '../devices';
 import 'react-select/scss/default.scss';
 import Relay from 'react-relay';
-import ChangeApplicationMutation from './mutations/ChangeApplicationMutation';
+import ChangeApplicationMutation from '../mutations/ChangeApplicationMutation';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
-import Config from './config';
+import Config from '../config';
 import Auth0Lock from 'auth0-lock';
-
-
 
 class Main extends Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       code: null,
@@ -27,10 +25,10 @@ class Main extends Component {
   }
   componentDidMount() {
     this.lock = new Auth0Lock(Config.AUTH0_CLIENT_ID, Config.AUTH0_DOMAIN);
-    this.setState({code: this.props.application.indexIos, name: this.props.application.name});
+    this.setState({code: this.props.application.body, name: this.props.application.name});
     this.simulator = new Appetize();
-    this.lock.on('authenticated',function(authResult){
-      localStorage.setItem("idToken", authResult.idToken);
+    this.lock.on('authenticated', function (authResult) {
+      localStorage.setItem('idToken', authResult.idToken);
       this.setState({loggedIn:true});
     }.bind(this));
   }
@@ -42,7 +40,7 @@ class Main extends Component {
       new ChangeApplicationMutation({
         id: this.props.application.id,
         name: this.state.name,
-        indexIos: this.state.code
+        body: this.state.code
       }), {
         onFailure: (transaction) => {
           console.error(transaction.getError());
@@ -107,7 +105,7 @@ class Main extends Component {
           </div>
         </div>
         <div className={classNames(styles.column, styles.columnRight)}>
-          <Appetize id="mzv0wej631g9mxc881x2wmnpvc" options={{device: this.state.device}} />
+          <Appetize options={{device: this.state.device}} application={this.props.application} />
         </div>
       </div>
     );
@@ -120,8 +118,8 @@ export default Relay.createContainer(Main, {
       fragment on Application {
         id,
         name,
-        indexIos,
-        indexAndroid
+        urlToken,
+        body
       }
     `,
   },

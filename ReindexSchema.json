@@ -64,15 +64,7 @@
           "type": "String"
         },
         {
-          "name": "indexMain",
-          "type": "String"
-        },
-        {
-          "name": "indexIos",
-          "type": "String"
-        },
-        {
-          "name": "indexAndroid",
+          "name": "body",
           "type": "String"
         },
         {

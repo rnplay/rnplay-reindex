@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import Qs from 'qs';
-import {DEVICE_MEASUREMENTS} from './devices';
-import {DEVICES} from './devices';
-import Draggable from 'react-draggable';
-import classNames from 'classnames';
-import styles from './styles/main.css';
+import {DEVICES, DEVICE_MEASUREMENTS} from '../devices';
+import styles from '../styles/main.css';
 import Select from 'react-select';
+import Config from '../config';
 
 export default class Appetize extends Component {
 
   state = {
-    embed: true,
-    screenOnly: true,
-    xdocMsg: true,
-    debug: true,
-    scale: 75,
-    orientation: 'portrait',
-    device: 'iphone6'
+    device: 'iphone6',
+    scale: 75
   };
 
   switchToDevice = (option) => {
@@ -28,14 +21,35 @@ export default class Appetize extends Component {
   }
 
   url() {
-    return `https://appetize.io/embed/${this.props.id}?
-      ${Qs.stringify(this.state)}&
-      params=${encodeURIComponent(JSON.stringify(this.props.appParams))}`;
+    let platform =  this.state.device.includes("ip") ? 'ios' : 'android';
+    let appetizeKey = platform == 'ios' ? 'mzv0wej631g9mxc881x2wmnpvc' : 'rkwyy8kaabjhz3zq2160n9gprw';
+    let manifestUrl = `${Config.RNPLAY_MANIFEST_BASE_URL}/expManifest-development?urlToken=${this.props.application.urlToken}`;
+
+    console.log(manifestUrl)
+
+    let appetizeOptions = {
+      embed: true,
+      screenOnly: true,
+      xdocMsg: true,
+      debug: true,
+      scale: this.state.scale,
+      orientation: 'portrait',
+      device: this.state.device,
+      launchUrl: platform === 'android' ? manifestUrl : undefined
+    };
+
+    let appParams = {
+      'EXKernelLaunchUrlDefaultsKey': manifestUrl
+    };
+
+    return `https://appetize.io/embed/${appetizeKey}?
+      ${Qs.stringify(appetizeOptions)}&
+      params=${encodeURIComponent(JSON.stringify(appParams))}`;
   }
 
 
   messageEventHandler(message) {
-    console.log(message);
+    console.log(message.data ? message.data : message);
   }
 
   componentDidMount() {
@@ -56,7 +70,7 @@ export default class Appetize extends Component {
               name="device"
               clearable={false}
               value={this.state.device}
-              options={DEVICES.ios}
+              options={DEVICES.ios.concat(DEVICES.android)}
               onChange={this.switchToDevice}
             />
           </div>

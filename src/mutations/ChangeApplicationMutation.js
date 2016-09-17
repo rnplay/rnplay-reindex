@@ -9,7 +9,7 @@ export default class ChangeApplicationMutation extends Relay.Mutation {
     return {
       id: this.props.id,
       name: this.props.name,
-      indexIos: this.props.indexIos,
+      body: this.props.body,
       updatedAt: '@TIMESTAMP',
     };
   }
@@ -39,7 +39,7 @@ export default class ChangeApplicationMutation extends Relay.Mutation {
       changedApplication: {
         id: this.props.id,
         name: this.props.name,
-        indexIos: this.props.indexIos
+        body: this.props.body
       },
     };
   }

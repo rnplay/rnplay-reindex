@@ -57,8 +57,7 @@ async function run(context, cb) {
       updatedAt: '@TIMESTAMP',
       urlToken: hash,
       name: 'React Native Starter',
-      indexIos: SAMPLE,
-      indexAndroid: SAMPLE
+      body: SAMPLE
     });
 
     cb(null, {urlToken: hash});

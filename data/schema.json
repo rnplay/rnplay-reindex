@@ -4756,31 +4756,7 @@
               "deprecationReason": null
             },
             {
-              "name": "indexMain",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "indexIos",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "indexAndroid",
+              "name": "body",
               "description": null,
               "args": [],
               "type": {
@@ -9120,27 +9096,7 @@
               "defaultValue": null
             },
             {
-              "name": "indexMain",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "indexIos",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "indexAndroid",
+              "name": "body",
               "description": null,
               "type": {
                 "kind": "SCALAR",
@@ -9308,27 +9264,7 @@
               "defaultValue": null
             },
             {
-              "name": "indexMain",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "indexIos",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "indexAndroid",
+              "name": "body",
               "description": null,
               "type": {
                 "kind": "SCALAR",
@@ -9423,27 +9359,7 @@
               "defaultValue": null
             },
             {
-              "name": "indexMain",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "indexIos",
-              "description": null,
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "indexAndroid",
+              "name": "body",
               "description": null,
               "type": {
                 "kind": "SCALAR",
