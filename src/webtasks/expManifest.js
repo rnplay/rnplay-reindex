@@ -46,7 +46,12 @@ module.exports = function run(context, req, res) {
     .send(signingPayload)
     .set('Accept', 'application/json')
     .end((err, response) => {
-      res.writeHead(200, { 'Content-Type': 'application/json '});
+      if (err) {
+        console.log(err);
+        res.writeHead(500, { 'Content-Type': 'text/plain'});
+        res.end(err);
+      }
+      res.writeHead(200, { 'Content-Type': 'application/json'});
       res.end(response.body.response);
     });
 };
