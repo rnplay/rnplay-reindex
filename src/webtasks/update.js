@@ -88,7 +88,7 @@ TASKS.forEach((task) => {
   let defaultParams = {
     reindexAdminToken: REINDEX_TOKEN,
     reindexUrl: REINDEX_URL,
-    exponentSecret: process.ENV['EXPONENT_SECRET'],
+    exponentSecret: process.env.EXPONENT_SECRET,
     env: env
   };
 
