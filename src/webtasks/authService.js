@@ -8,7 +8,6 @@ export default class AuthService {
   }
 
   _doAuthentication(authResult){
-    this.setToken(authResult.idToken);
     Reindex.loginWithToken('auth0',authResult.idToken)
     .catch((err)=>{
       console.log(err);
