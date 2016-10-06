@@ -1,5 +1,7 @@
 import Auth0Lock from 'auth0-lock'
 import Reindex from '../Reindex';
+import {store} from '../index';
+import * as authActions from '../actions/authentication';
 export default class AuthService {
   constructor(clientId, domain, options) {
     this.lock = new Auth0Lock(clientId, domain, options)
@@ -8,8 +10,11 @@ export default class AuthService {
   }
 
   _doAuthentication(authResult){
-    this.setToken(authResult.idToken);
     Reindex.loginWithToken('auth0',authResult.idToken)
+    .then(data=>{
+      console.log(data);
+      store.dispatch(authActions.checkLogin(true));
+    })
     .catch((err)=>{
       console.log(err);
     });

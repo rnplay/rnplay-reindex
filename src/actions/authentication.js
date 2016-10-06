@@ -1,10 +1,13 @@
-const PROCESS_AUTH = 'PROCESS_AUTH';
 
-function porcessAuth (payload){
+const types={
+	CHECK_LOGIN : 'CHECK_LOGIN'
+}
+
+function checkLogin (payload){
 	return {
-		type:PROCESS_AUTH,
-		...payload
+		type:types.CHECK_LOGIN,
+		payload:payload
 	};
 }
 
-export {types, porcessAuth};
+export {types, checkLogin};
